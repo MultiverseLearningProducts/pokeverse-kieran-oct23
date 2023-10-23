@@ -1,12 +1,33 @@
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import xLg from "../assets/x-lg.svg";
 import useSWR, { fetcher } from "../swr";
 
 function PokemonCard({ url }) {
 	const { data, error, isLoading } = useSWR(url, fetcher);
 
-	// TODO: Handle error and loading states
-	if (error || isLoading) return;
+	if (error) {
+		return (
+			<Card className="align-items-center">
+				<Card.Body>
+					<Card.Img src={xLg} alt="Error" width="96" height="96" />
+				</Card.Body>
+			</Card>
+		);
+	}
+
+	if (isLoading) {
+		return (
+			<Card className="align-items-center">
+				<Card.Body>
+					<Spinner animation="border">
+						<span className="visually-hidden">Loading...</span>
+					</Spinner>
+				</Card.Body>
+			</Card>
+		);
+	}
 
 	return (
 		<Card className="align-items-center">
@@ -14,7 +35,7 @@ function PokemonCard({ url }) {
 				variant="top"
 				className="w-auto"
 				src={data.sprites.front_default}
-				alt="" // hides from a11y tree for now
+				alt="" // hide from a11y tree because there is no description
 				width="96"
 				height="96"
 			/>
