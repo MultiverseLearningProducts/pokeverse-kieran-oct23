@@ -9,7 +9,7 @@ import Wrapper from "./components/Wrapper";
 import useSWR, { fetcher } from "./swr";
 import { chunkArray } from "./util";
 
-const LIMIT = 150;
+const LIMIT = 151;
 const POKE_API = `https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}`;
 
 function App() {
