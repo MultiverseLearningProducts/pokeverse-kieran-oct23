@@ -8,3 +8,9 @@ export function chunkArray(array, size = 1) {
 
 	return chunks;
 }
+
+export async function getData(url) {
+	const response = await fetch(url);
+	if (response.ok) return response.json();
+	throw new Error(response.statusText);
+}
